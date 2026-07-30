@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { AuthContext, type User } from "../contexts/AuthContext";
+import { API_URL } from "../config";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -23,7 +24,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const fetchCurrentUser = async (authToken: string) => {
     try {
-      const res = await fetch("http://localhost:8000/auth/me", {
+      const res = await fetch(`${API_URL}/auth/me`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -50,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = async (username: string, password: string) => {
-    const res = await fetch("http://localhost:8000/auth/login", {
+    const res = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +78,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signup = async (username: string, password: string) => {
-    const res = await fetch("http://localhost:8000/auth/signup", {
+    const res = await fetch(`${API_URL}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +134,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       );
 
       // Send batch migration request
-      const res = await fetch("http://localhost:8000/migrate-history", {
+      const res = await fetch(`${API_URL}/migrate-history`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${authToken}`,
