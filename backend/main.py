@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from auth.routes import router as auth_router
 from analysis.routes import router as analysis_router
@@ -13,13 +14,13 @@ app = FastAPI(
     )
 Base.metadata.create_all(bind=engine)
 # Allow frontend to call backend for dev, adjust origins in production.
+# Origins are set via CORS_ORIGINS env var (comma-separated). Falls back to
+# Vite dev server for local development.
+allowed_origins = os.environ.get("CORS_ORIGINS", "http://localhost:5173").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    # Vite dev server
-    allow_origins=["http://localhost:5173",
-                    "http://localhost:5174",
-                    "http://127.0.0.1:5173",
-                    "http://127.0.0.1:5174"],
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,
