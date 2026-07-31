@@ -52,36 +52,6 @@ const getThreshold = (m?: string) =>
     ? (MODEL_THRESHOLDS[m] ?? REAL_CONFIDENCE_THRESHOLD)
     : REAL_CONFIDENCE_THRESHOLD;
 
-// Using unsplash source which has better CORS support
-const EXAMPLE_CARDS = [
-  {
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop",
-    label: "Mountain Lake",
-    isReal: true,
-  },
-  {
-    url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=150&fit=crop",
-    label: "Portrait",
-    isReal: false,
-  },
-  {
-    url: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=200&h=150&fit=crop",
-    label: "City Night",
-    isReal: false,
-  },
-  {
-    url: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=200&h=150&fit=crop",
-    label: "Dog Park",
-    isReal: true,
-  },
-];
-
-const STATS = [
-  { num: "4", label: "Detection models" },
-  { num: "<3s", label: "Analysis time" },
-  { num: "94%", label: "Accuracy" },
-];
-
 const FEATURES = [
   {
     icon: "⚡",
@@ -218,7 +188,6 @@ export const Analyzer = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [funnyMsg, setFunnyMsg] = useState(FUNNY_MESSAGES[0]);
   const [msgIdx, setMsgIdx] = useState(0);
-  const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
 
   const context = useContext(AppContext);
   const {
@@ -368,10 +337,6 @@ export const Analyzer = () => {
   };
 
   const showLanding = !preview && !loading && !currentResult;
-
-  // Emoji fallback colors for when images fail
-  const fallbackColors = ["#e0e7ff", "#fce7f3", "#cffafe", "#d1fae5"];
-  const fallbackEmojis = ["🏔️", "👤", "🌆", "🐕"];
 
   return (
     <>

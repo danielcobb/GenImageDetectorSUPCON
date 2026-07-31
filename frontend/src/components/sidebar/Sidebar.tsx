@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box, List, ListItem, ListItemButton, Typography } from "@mui/material";
 import { HistoryOutlined } from "@mui/icons-material";
-import { AppContext, type AppContextType } from "../../contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
 import { confidenceToString } from "../../utils";
 
 export const Sidebar = () => {
