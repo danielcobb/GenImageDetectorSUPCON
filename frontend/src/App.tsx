@@ -137,8 +137,8 @@ const AppContent = () => {
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: 1.5,
-              px: 3,
+              gap: { xs: 0.75, sm: 1.5 },
+              px: { xs: 1.5, sm: 2, md: 3 },
               py: 1.5,
               background: (t) =>
                 t.palette.mode === "dark"
@@ -157,26 +157,29 @@ const AppContent = () => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: 1.25,
+                gap: { xs: 0.75, sm: 1.25 },
                 cursor: "pointer",
+                minWidth: 0,
+                flexShrink: 1,
               }}
               onClick={goHome}
             >
               <Box
                 sx={{
-                  width: 34,
-                  height: 34,
+                  width: { xs: 28, sm: 34 },
+                  height: { xs: 28, sm: 34 },
                   borderRadius: 2,
                   background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow: "0 4px 12px rgba(99,102,241,0.3)",
+                  flexShrink: 0,
                 }}
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="#fff"
@@ -190,10 +193,12 @@ const AppContent = () => {
               </Box>
               <Typography
                 sx={{
+                  display: { xs: "none", sm: "block" },
                   fontFamily: "'Syne',sans-serif",
                   fontWeight: 800,
                   fontSize: "15px",
                   color: "text.primary",
+                  whiteSpace: "nowrap",
                 }}
               >
                 GenImage
@@ -255,8 +260,10 @@ const AppContent = () => {
             {page === "home" && (
               <Tooltip title={showHistory ? "Hide History" : "Show History"}>
                 <IconButton
+                  size="small"
                   onClick={() => setShowHistory((prev) => !prev)}
                   sx={{
+                    flexShrink: 0,
                     color: showHistory ? "#6366f1" : "#64748b",
                     border: "1px solid rgba(99,102,241,0.15)",
                     bgcolor: showHistory
@@ -265,7 +272,7 @@ const AppContent = () => {
                     "&:hover": { bgcolor: "rgba(99,102,241,0.12)" },
                   }}
                 >
-                  <History />
+                  <History fontSize="small" />
                 </IconButton>
               </Tooltip>
             )}
@@ -308,11 +315,22 @@ const AppContent = () => {
               <Button
                 variant="contained"
                 size="small"
-                startIcon={<Login />}
+                startIcon={<Login sx={{ display: { xs: "none", sm: "inline-flex" } }} />}
                 onClick={() => setAuthDialogOpen(true)}
-                sx={{ fontSize: "13px" }}
+                sx={{
+                  fontSize: "13px",
+                  flexShrink: 0,
+                  whiteSpace: "nowrap",
+                  px: { xs: 1.25, sm: 2 },
+                  minWidth: 0,
+                }}
               >
-                Sign In/Sign Up
+                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                  Sign In/Sign Up
+                </Box>
+                <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                  Sign In
+                </Box>
               </Button>
             )}
           </Box>
