@@ -28,6 +28,7 @@ import {
 import { AppContext, type AppContextType } from "../../contexts/AppContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { confidenceToString } from "../../utils";
+import { API_URL } from "../../config";
 
 const VisuallyHiddenInput = styled("input")(() => ({
   clip: "rect(0 0 0 0)",
@@ -303,7 +304,7 @@ export const Analyzer = () => {
       setLoadingStage("Running AI detection models...");
       setLoadingProgress(40);
       await delay(300, 600);
-      const res = await fetch("http://localhost:8000/analyze", {
+      const res = await fetch(`${API_URL}/analyze`, {
         method: "POST",
         headers,
         body: formData,

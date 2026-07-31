@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Login, Logout, History, DarkMode, LightMode } from "@mui/icons-material";
 import { makeTheme } from "./theme";
+import { API_URL } from "./config";
 
 type ColorMode = "light" | "dark";
 const COLOR_MODE_KEY = "color-mode";
@@ -236,7 +237,7 @@ const AppContent = () => {
               <Button
                 size="small"
                 onClick={() =>
-                  window.open("http://localhost:8000/docs", "_blank")
+                  window.open(`${API_URL}/docs`, "_blank")
                 }
                 sx={{
                   color: "#64748b",
@@ -344,7 +345,7 @@ const AppContent = () => {
               sx={{ fontSize: "12px" }}
             >
               <Link
-                href="http://localhost:8000/docs"
+                href={`${API_URL}/docs`}
                 target="_blank"
                 sx={{
                   mx: 1,

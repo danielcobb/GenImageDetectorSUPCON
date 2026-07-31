@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, type ReactNode } from "react";
 import { AppContext, type HistoryItem } from "../contexts/AppContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { API_URL } from "../config";
 
 const STORAGE_KEY = "anonymous_history";
 
@@ -106,7 +107,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 
   const fetchHistoryFromBackend = async (token: string) => {
     try {
-      const res = await fetch("http://localhost:8000/history", {
+      const res = await fetch(`${API_URL}/history`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
