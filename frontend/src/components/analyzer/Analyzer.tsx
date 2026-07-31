@@ -596,14 +596,14 @@ export const Analyzer = () => {
                 Try With Your Image →
                 <VisuallyHiddenInput
                   type="file"
-                  accept="image/png,image/jpeg"
+                  accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                   onChange={(e) => {
                     if (e.target.files) setImage(e.target.files[0]);
                   }}
                 />
               </Button>
               <Typography sx={{ fontSize: 12, color: "#94a3b8", mt: 1.5 }}>
-                PNG or JPEG · up to 10MB · Try for free
+                PNG, JPEG, or HEIC · up to 10MB · Try for free
               </Typography>
             </Box>
             {/* ── Feature cards ── */}
@@ -754,7 +754,7 @@ export const Analyzer = () => {
                 Change Image
                 <VisuallyHiddenInput
                   type="file"
-                  accept="image/png,image/jpeg"
+                  accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                   onChange={(e) => {
                     if (e.target.files) setImage(e.target.files[0]);
                   }}
@@ -909,7 +909,7 @@ export const Analyzer = () => {
                   New Image
                   <VisuallyHiddenInput
                     type="file"
-                    accept="image/png,image/jpeg"
+                    accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                     onChange={(e) => {
                       if (e.target.files) setImage(e.target.files[0]);
                     }}

@@ -8,6 +8,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
 from huggingface_hub import hf_hub_download
 from PIL import Image
+from pillow_heif import register_heif_opener
 from sqlalchemy.orm import Session
 
 from analysis.models import Analysis, ModelResult
@@ -27,6 +28,9 @@ from ml.classifiers.npr_supcon import NPRSupConClassifier
 from ml.classifiers.spai import SPAIClassifier
 from ml.classifiers.vib import VIBClassifier
 
+# Lets Pillow's Image.open() decode HEIC/HEIF files (the default format for
+# photos captured on iPhone) in addition to its natively supported formats.
+register_heif_opener()
 
 router = APIRouter(tags=["Analysis"])
 
