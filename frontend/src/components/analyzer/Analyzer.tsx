@@ -1161,10 +1161,14 @@ export const Analyzer = () => {
                           bgcolor: "rgba(99,102,241,0.06)",
                           border: "1px solid rgba(99,102,241,0.12)",
                           color: "#6366f1",
-                          px: 1,
+                          px: 0.5,
                           py: 0.3,
                           borderRadius: 1,
                           flexShrink: 0,
+                          width: 68,
+                          textAlign: "center",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
                         }}
                       >
