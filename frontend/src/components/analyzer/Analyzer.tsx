@@ -732,8 +732,8 @@ export const Analyzer = () => {
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", sm: "row" },
+                alignItems: "center",
                 gap: 2,
-                width: { xs: "100%", sm: "auto" },
               }}
             >
               <Button
@@ -747,7 +747,6 @@ export const Analyzer = () => {
                   fontSize: "1rem",
                   fontWeight: 700,
                   borderRadius: 2,
-                  width: { xs: "100%", sm: "auto" },
                 }}
               >
                 Analyze Image
@@ -757,7 +756,7 @@ export const Analyzer = () => {
                 size="large"
                 component="label"
                 startIcon={<AddPhotoAlternate />}
-                sx={{ borderRadius: 2, width: { xs: "100%", sm: "auto" } }}
+                sx={{ borderRadius: 2 }}
               >
                 Change Image
                 <VisuallyHiddenInput

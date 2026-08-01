@@ -4,6 +4,20 @@ import { AuthContext } from "../contexts/AuthContext";
 import { API_URL } from "../config";
 
 const STORAGE_KEY = "anonymous_history";
+const CURRENT_RESULT_KEY = "current_result";
+
+// Mobile browsers (notably iOS Safari) can reload the tab's JS context when
+// the native camera/photo picker takes over, wiping all in-memory state and
+// dropping the user back on the landing page mid-flow. sessionStorage
+// survives that reload, so we use it to restore the last-viewed result.
+const loadStoredCurrentResult = (): HistoryItem | null => {
+  try {
+    const stored = sessionStorage.getItem(CURRENT_RESULT_KEY);
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+};
 
 const isQuotaError = (err: unknown): boolean =>
   err instanceof DOMException &&
@@ -58,7 +72,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [currentResult, setCurrentResult] = useState<HistoryItem | null>(null);
+  const [currentResult, setCurrentResult] = useState<HistoryItem | null>(
+    loadStoredCurrentResult
+  );
   const authContext = useContext(AuthContext);
 
   // Reset state on logout
@@ -71,6 +87,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     window.addEventListener("auth:logout", handleLogout);
     return () => window.removeEventListener("auth:logout", handleLogout);
   }, []);
+
+  // Keep sessionStorage in sync so a mobile browser reload (e.g. triggered by
+  // the native camera/photo picker) can restore the in-progress result.
+  useEffect(() => {
+    try {
+      if (currentResult) {
+        sessionStorage.setItem(CURRENT_RESULT_KEY, JSON.stringify(currentResult));
+      } else {
+        sessionStorage.removeItem(CURRENT_RESULT_KEY);
+      }
+    } catch {
+      /* ignore quota/serialization errors - this is best-effort resiliency */
+    }
+  }, [currentResult]);
 
   // Load history on mount - either from localStorage (anonymous) or backend (logged in)
   useEffect(() => {
