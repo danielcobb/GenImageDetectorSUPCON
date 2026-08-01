@@ -197,6 +197,7 @@ const AppContent = () => {
                   fontFamily: "'Syne',sans-serif",
                   fontWeight: 800,
                   fontSize: "15px",
+                  letterSpacing: "0.02em",
                   color: "text.primary",
                   whiteSpace: "nowrap",
                 }}

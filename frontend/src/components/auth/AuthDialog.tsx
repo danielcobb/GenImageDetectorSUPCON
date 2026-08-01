@@ -128,6 +128,7 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose }) => {
               fontFamily: "'Syne',sans-serif",
               fontWeight: 800,
               fontSize: 18,
+              letterSpacing: "0.02em",
               color: "#1a1a2e",
             }}
           >

@@ -104,7 +104,7 @@ const ConfidenceBar = ({
     return () => clearTimeout(t);
   }, [confidence]);
   return (
-    <Box sx={{ width: "100%", maxWidth: 180 }}>
+    <Box sx={{ width: "100%", maxWidth: { xs: "none", sm: 180 } }}>
       <LinearProgress
         variant="determinate"
         value={animated}
@@ -965,6 +965,7 @@ export const Analyzer = () => {
                   bgcolor: "transparent",
                   boxShadow: "none",
                   border: "none",
+                  display: { xs: "none", sm: "block" },
                 }}
               >
                 <Table>
@@ -1125,6 +1126,165 @@ export const Analyzer = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+
+              {/* Mobile: stacked card list (avoids horizontal scroll) */}
+              <Box sx={{ display: { xs: "block", sm: "none" } }}>
+                {currentResult.results.map((result, idx) => (
+                  <Box
+                    key={idx}
+                    sx={{
+                      px: 2.5,
+                      py: 2,
+                      borderBottom: (t) =>
+                        t.palette.mode === "dark"
+                          ? "1px solid rgba(255,255,255,0.08)"
+                          : "1px solid rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 1,
+                        mb: 1.5,
+                      }}
+                    >
+                      <Box
+                        component="code"
+                        sx={{
+                          fontFamily: "monospace",
+                          fontSize: "0.78rem",
+                          bgcolor: "rgba(99,102,241,0.06)",
+                          border: "1px solid rgba(99,102,241,0.12)",
+                          color: "#6366f1",
+                          px: 1.1,
+                          py: 0.35,
+                          borderRadius: 1,
+                        }}
+                      >
+                        {result.model}
+                      </Box>
+                      <Chip
+                        label={confidenceToString(
+                          result.confidence,
+                          undefined,
+                          undefined,
+                          undefined,
+                          result.model,
+                        )}
+                        color={
+                          result.confidence > getThreshold(result.model)
+                            ? "success"
+                            : "error"
+                        }
+                        variant="outlined"
+                        size="small"
+                        sx={{ fontWeight: 700, fontSize: "0.68rem" }}
+                      />
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                      <Typography
+                        fontWeight={700}
+                        fontSize="0.85rem"
+                        sx={{
+                          minWidth: 40,
+                          color:
+                            result.confidence > getThreshold(result.model)
+                              ? "#16a34a"
+                              : "#e11d48",
+                        }}
+                      >
+                        {result.confidence}%
+                      </Typography>
+                      <Box sx={{ flex: 1, minWidth: 0 }}>
+                        <ConfidenceBar
+                          confidence={result.confidence}
+                          modelName={result.model}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                ))}
+                {currentResult.analysis && (
+                  <Box
+                    sx={{
+                      px: 2.5,
+                      py: 2.5,
+                      bgcolor: "rgba(99,102,241,0.02)",
+                      borderTop: "2px solid rgba(99,102,241,0.1)",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        mb: 1.5,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 8,
+                          height: 8,
+                          borderRadius: "50%",
+                          background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
+                        }}
+                      />
+                      <Typography
+                        fontWeight={800}
+                        fontSize="0.9rem"
+                        sx={{ fontFamily: "'Syne',sans-serif" }}
+                      >
+                        Final Analysis
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 1.5,
+                      }}
+                    >
+                      <ConfidenceGauge
+                        confidence={currentResult.analysis.confidence}
+                      />
+                      <Chip
+                        icon={
+                          currentResult.analysis.confidence >= 50 ? (
+                            <CheckCircleOutline
+                              sx={{ fontSize: "1rem!important" }}
+                            />
+                          ) : (
+                            <WarningAmberRounded
+                              sx={{ fontSize: "1rem!important" }}
+                            />
+                          )
+                        }
+                        label={confidenceToString(
+                          currentResult.analysis.confidence,
+                          "Likely Real",
+                          "Likely AI-generated",
+                          undefined,
+                          currentResult.analysis.model,
+                        )}
+                        color={
+                          currentResult.analysis.confidence >= 50
+                            ? "success"
+                            : "error"
+                        }
+                        size="medium"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: "0.78rem",
+                          px: 0.5,
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                )}
+              </Box>
             </Box>
           </Box>
         )}
