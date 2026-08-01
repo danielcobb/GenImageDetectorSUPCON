@@ -193,17 +193,19 @@ const AppContent = () => {
               </Box>
               <Typography
                 sx={{
-                  display: { xs: "none", sm: "block" },
                   fontFamily: "'Syne',sans-serif",
-                  fontWeight: 800,
-                  fontSize: "15px",
-                  letterSpacing: "0.02em",
+                  fontWeight: 700,
+                  fontSize: { xs: "14px", sm: "15px" },
+                  letterSpacing: "0.03em",
                   color: "text.primary",
                   whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: { xs: 160, sm: "none" },
                 }}
               >
                 GenImage
-                <Box component="span" sx={{ color: "#6366f1" }}>
+                <Box component="span" sx={{ color: "#6366f1", ml: "2px" }}>
                   Detector
                 </Box>
               </Typography>
