@@ -531,17 +531,7 @@ export const Analyzer = () => {
                     py: 0.75,
                     mb: 2,
                   }}
-                >
-                  <Box
-                    sx={{
-                      width: 7,
-                      height: 7,
-                      borderRadius: "50%",
-                      bgcolor: "#6366f1",
-                      animation: "dotPulse 2s infinite",
-                    }}
-                  />
-                </Box>
+                ></Box>
                 <Typography
                   component="div"
                   sx={{
