@@ -354,8 +354,8 @@ export const Analyzer = () => {
     return date.getDate() === today.getDate() &&
       date.getMonth() === today.getMonth() &&
       date.getFullYear() === today.getFullYear()
-      ? date.toLocaleTimeString()
-      : date.toLocaleString();
+      ? date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
+      : date.toLocaleString([], { hour: "numeric", minute: "2-digit" });
   };
 
   const showLanding = !preview && !loading && !currentResult;
