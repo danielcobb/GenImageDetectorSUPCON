@@ -519,19 +519,6 @@ export const Analyzer = () => {
 
               {/* Right: hero text */}
               <Box sx={{ flex: 1, minWidth: { xs: "100%", sm: 280 } }}>
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 1,
-                    bgcolor: "rgba(99,102,241,0.06)",
-                    border: "1px solid rgba(99,102,241,0.15)",
-                    borderRadius: 20,
-                    px: 2,
-                    py: 0.75,
-                    mb: 2,
-                  }}
-                ></Box>
                 <Typography
                   component="div"
                   sx={{
