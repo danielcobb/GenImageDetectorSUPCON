@@ -28,3 +28,4 @@ backend/ml/models/VIB/*.pth
 
 backend/analysis/routes_old.py
 *-IshaGill.*
+backend/.env

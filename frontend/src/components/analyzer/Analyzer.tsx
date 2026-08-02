@@ -363,7 +363,7 @@ export const Analyzer = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap');
         @keyframes float1{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-18px) rotate(1deg)}}
         @keyframes float2{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-14px) rotate(-1deg)}}
         @keyframes float3{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
@@ -522,7 +522,7 @@ export const Analyzer = () => {
                 <Typography
                   component="div"
                   sx={{
-                    fontFamily: "'Syne',sans-serif",
+                    fontFamily: "'Bricolage Grotesque',sans-serif",
                     fontSize: { xs: "2rem", md: "2.8rem" },
                     fontWeight: 800,
                     lineHeight: 1.05,
@@ -643,7 +643,7 @@ export const Analyzer = () => {
                   </Box>
                   <Typography
                     sx={{
-                      fontFamily: "'Syne',sans-serif",
+                      fontFamily: "'Bricolage Grotesque',sans-serif",
                       fontSize: 14,
                       fontWeight: 700,
                       color: (t) =>
@@ -695,7 +695,7 @@ export const Analyzer = () => {
             >
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 700,
                   fontSize: 14,
                   color: "#94a3b8",
@@ -785,7 +785,7 @@ export const Analyzer = () => {
                 fontSize: 18,
                 fontWeight: 700,
                 color: "#6366f1",
-                fontFamily: "'Syne',sans-serif",
+                fontFamily: "'Bricolage Grotesque',sans-serif",
                 mb: 2,
                 animation: "msgFade 2.2s ease forwards",
               }}
@@ -871,7 +871,7 @@ export const Analyzer = () => {
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <Typography
                   sx={{
-                    fontFamily: "'Syne',sans-serif",
+                    fontFamily: "'Bricolage Grotesque',sans-serif",
                     fontWeight: 800,
                     fontSize: 16,
                     color: (t) =>
@@ -945,7 +945,7 @@ export const Analyzer = () => {
               >
                 <Typography
                   sx={{
-                    fontFamily: "'Syne',sans-serif",
+                    fontFamily: "'Bricolage Grotesque',sans-serif",
                     fontWeight: 800,
                     fontSize: 17,
                     color: (t) =>
@@ -1073,7 +1073,7 @@ export const Analyzer = () => {
                             <Typography
                               fontWeight={800}
                               fontSize="0.9rem"
-                              sx={{ fontFamily: "'Syne',sans-serif" }}
+                              sx={{ fontFamily: "'Bricolage Grotesque',sans-serif" }}
                             >
                               Final Analysis
                             </Typography>
@@ -1223,7 +1223,7 @@ export const Analyzer = () => {
                       <Typography
                         fontWeight={800}
                         fontSize="0.9rem"
-                        sx={{ fontFamily: "'Syne',sans-serif" }}
+                        sx={{ fontFamily: "'Bricolage Grotesque',sans-serif" }}
                       >
                         Final Analysis
                       </Typography>

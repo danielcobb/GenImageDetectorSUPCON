@@ -38,7 +38,7 @@ export const makeTheme = (mode: PaletteMode) => {
     components: {
       MuiCssBaseline: {
         styleOverrides: `
-          @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
           * { box-sizing: border-box; }
           body { background: ${bgDefault}; min-height: 100vh; }
           ::-webkit-scrollbar { width: 6px; }

@@ -194,7 +194,7 @@ const AppContent = () => {
               </Box>
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 700,
                   fontSize: { xs: "14px", sm: "15px" },
                   letterSpacing: "0.03em",

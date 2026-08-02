@@ -125,7 +125,7 @@ export const AuthDialog: React.FC<AuthDialogProps> = ({ open, onClose }) => {
           </Box>
           <Typography
             sx={{
-              fontFamily: "'Syne',sans-serif",
+              fontFamily: "'Bricolage Grotesque',sans-serif",
               fontWeight: 700,
               fontSize: 18,
               letterSpacing: "0.03em",

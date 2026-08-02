@@ -9,7 +9,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&display=swap');
         @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
       `}</style>
@@ -78,7 +78,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
           </Box>
           <Typography
             sx={{
-              fontFamily: "'Syne',sans-serif",
+              fontFamily: "'Bricolage Grotesque',sans-serif",
               fontSize: { xs: "2rem", md: "2.8rem" },
               fontWeight: 800,
               color: "text.primary",
@@ -152,7 +152,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
             <Box sx={{ flex: 1, minWidth: 240 }}>
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 800,
                   fontSize: 18,
                   color: "text.primary",
@@ -210,7 +210,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
             <Box sx={{ flex: 1, minWidth: 240 }}>
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 800,
                   fontSize: 18,
                   color: "text.primary",
@@ -271,7 +271,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
             <Box sx={{ flex: 1, minWidth: 240 }}>
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 800,
                   fontSize: 18,
                   color: "text.primary",
@@ -330,7 +330,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
             <Box sx={{ flex: 1, minWidth: 240 }}>
               <Typography
                 sx={{
-                  fontFamily: "'Syne',sans-serif",
+                  fontFamily: "'Bricolage Grotesque',sans-serif",
                   fontWeight: 800,
                   fontSize: 18,
                   color: "text.primary",
