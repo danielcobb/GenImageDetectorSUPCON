@@ -541,16 +541,6 @@ export const Analyzer = () => {
                       animation: "dotPulse 2s infinite",
                     }}
                   />
-                  <Typography
-                    sx={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#6366f1",
-                      letterSpacing: ".06em",
-                    }}
-                  >
-                    AI IMAGE DETECTION ENGINE
-                  </Typography>
                 </Box>
                 <Typography
                   component="div"
