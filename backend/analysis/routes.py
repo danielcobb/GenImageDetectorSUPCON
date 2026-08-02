@@ -56,16 +56,9 @@ cnnspot_classifier = CNNSpotClassifier(
     quiet=True,
 )
 
-"""
-effort_classifier = EffortClassifier(
-    _weights("effort_clip_L14_trainOn_sdv14.pth"),
-    quiet=True,
-)
-"""
-
 effort_supcon_classifier = EffortSupConClassifier(
-    _weights("last.pth"),
-    _weights("best_linear_effort.pth"),
+    _weights("effort_epoch4_combined.pth"),
+    _weights("effort_linear_epoch5_combined.pth"),
     quiet=True,
 )
 
