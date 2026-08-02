@@ -526,7 +526,7 @@ export const Analyzer = () => {
                     fontSize: { xs: "2rem", md: "2.8rem" },
                     fontWeight: 800,
                     lineHeight: 1.05,
-                    letterSpacing: "-.03em",
+                    letterSpacing: "normal",
                     mb: 2,
                     color: (t) =>
                       t.palette.mode === "dark" ? "#e8e8f3" : "#1a1a2e",

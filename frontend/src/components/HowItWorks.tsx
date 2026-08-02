@@ -83,7 +83,7 @@ export const HowItWorks = ({ onBack }: HowItWorksProps) => {
               fontWeight: 800,
               color: "text.primary",
               lineHeight: 1.1,
-              letterSpacing: "-.03em",
+              letterSpacing: "normal",
               mb: 2,
             }}
           >
