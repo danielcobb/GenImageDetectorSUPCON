@@ -16,6 +16,8 @@ import {
   Paper,
   styled,
   useTheme,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import {
   CheckCircleOutline,
@@ -41,6 +43,9 @@ const VisuallyHiddenInput = styled("input")(() => ({
   whiteSpace: "nowrap",
   width: 1,
 }));
+
+const MAX_FILE_SIZE_MB = 15;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 const MODEL_THRESHOLDS: Record<string, number> = {
   CNNSpot: 80,
@@ -188,6 +193,7 @@ export const Analyzer = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [funnyMsg, setFunnyMsg] = useState(FUNNY_MESSAGES[0]);
   const [msgIdx, setMsgIdx] = useState(0);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const context = useContext(AppContext);
   const {
@@ -199,6 +205,18 @@ export const Analyzer = () => {
   } = context as AppContextType;
   const authContext = useContext(AuthContext);
   const token = authContext?.token;
+
+  const handleFileSelect = (file: File | null | undefined) => {
+    if (!file) return;
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      setUploadError(
+        `That image is ${(file.size / (1024 * 1024)).toFixed(1)}MB, which is over the ${MAX_FILE_SIZE_MB}MB limit. Please choose a smaller image.`,
+      );
+      return;
+    }
+    setUploadError(null);
+    setImage(file);
+  };
 
   useEffect(() => {
     if (!loading) return;
@@ -218,7 +236,11 @@ export const Analyzer = () => {
       setPreview(undefined);
     };
     window.addEventListener("auth:logout", h);
-    return () => window.removeEventListener("auth:logout", h);
+    window.addEventListener("app:home", h);
+    return () => {
+      window.removeEventListener("auth:logout", h);
+      window.removeEventListener("app:home", h);
+    };
   }, []);
 
   useEffect(() => {
@@ -598,12 +620,12 @@ export const Analyzer = () => {
                   type="file"
                   accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                   onChange={(e) => {
-                    if (e.target.files) setImage(e.target.files[0]);
+                    handleFileSelect(e.target.files?.[0]);
                   }}
                 />
               </Button>
               <Typography sx={{ fontSize: 12, color: "#94a3b8", mt: 1.5 }}>
-                PNG, JPEG, or HEIC · up to 10MB · Try for free
+                PNG, JPEG, or HEIC · up to {MAX_FILE_SIZE_MB}MB · Try for free
               </Typography>
             </Box>
             {/* ── Feature cards ── */}
@@ -763,7 +785,7 @@ export const Analyzer = () => {
                   type="file"
                   accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                   onChange={(e) => {
-                    if (e.target.files) setImage(e.target.files[0]);
+                    handleFileSelect(e.target.files?.[0]);
                   }}
                 />
               </Button>
@@ -918,7 +940,7 @@ export const Analyzer = () => {
                     type="file"
                     accept="image/png,image/jpeg,image/heic,image/heif,.heic,.heif"
                     onChange={(e) => {
-                      if (e.target.files) setImage(e.target.files[0]);
+                      handleFileSelect(e.target.files?.[0]);
                     }}
                   />
                 </Button>
@@ -1289,6 +1311,22 @@ export const Analyzer = () => {
           </Box>
         )}
       </Box>
+
+      <Snackbar
+        open={!!uploadError}
+        autoHideDuration={6000}
+        onClose={() => setUploadError(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity="error"
+          variant="filled"
+          onClose={() => setUploadError(null)}
+          sx={{ borderRadius: 2 }}
+        >
+          {uploadError}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

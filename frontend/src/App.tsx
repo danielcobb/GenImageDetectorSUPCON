@@ -55,6 +55,7 @@ const AppContent = () => {
 
   const goHome = () => {
     appContext?.setCurrentResult(null);
+    window.dispatchEvent(new Event("app:home"));
     setPage("home");
     window.history.pushState({}, "", "/");
   };
