@@ -50,3 +50,8 @@ class AnalyzeResultResponse(BaseModel):
     """Schema for immediate analysis result with ID."""
     analysis_id: str | None = None
     results: dict[str, float]
+
+
+class TotalAnalysesResponse(BaseModel):
+    """Schema for the total analyses count."""
+    total_analyses: int

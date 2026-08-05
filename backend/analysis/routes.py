@@ -2,6 +2,7 @@
 
 import base64
 import io
+import logging
 import os
 from typing import Optional
 
@@ -9,17 +10,21 @@ from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
 from huggingface_hub import hf_hub_download
 from PIL import Image
 from pillow_heif import register_heif_opener
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from analysis.models import Analysis, ModelResult
+from analysis.models import Analysis, AnalysisEvent, ModelResult
 from analysis.schemas import (
     AnalysisResponse,
     HistoryMigrationRequest,
     HistoryMigrationResponse,
+    TotalAnalysesResponse,
 )
 from auth.models import User
 from auth.routes import get_current_user
 from db.database import get_db
+
+logger = logging.getLogger(__name__)
 from ml.classifiers.cnnspot import CNNSpotClassifier
 from ml.classifiers.effort import EffortClassifier
 from ml.classifiers.effort_supcon import EffortSupConClassifier
@@ -202,6 +207,19 @@ async def analyze_image(
         else 50.0
     )
 
+    # Log a lightweight event for the total-analyses counter. This covers
+    # anonymous and registered users alike, so it must not depend on
+    # `current_user` and must never break the analysis response.
+    try:
+        event = AnalysisEvent(
+            user_id=current_user.id if current_user else None,
+        )
+        db.add(event)
+        db.commit()
+    except Exception:
+        db.rollback()
+        logger.warning("Failed to log analysis event", exc_info=True)
+
     analysis_id = None
 
     if current_user:
@@ -320,3 +338,13 @@ async def migrate_history(
             f"items, {failed_count} failed"
         ),
     )
+
+
+@router.get(
+    "/stats/total-analyses",
+    response_model=TotalAnalysesResponse,
+)
+async def get_total_analyses(db: Session = Depends(get_db)):
+    """Get the total number of analyses run, registered and anonymous."""
+    count = db.query(func.count(AnalysisEvent.id)).scalar()
+    return TotalAnalysesResponse(total_analyses=count or 0)

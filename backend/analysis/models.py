@@ -32,3 +32,17 @@ class ModelResult(Base):
 
     # Relationship to analysis
     analysis = relationship("Analysis", back_populates="model_results")
+
+class AnalysisEvent(Base):
+    """Minimal record of a single analysis run, used only to count total analyses.
+
+    Kept separate from `Analysis` (which stores the full image + per-model
+    results and requires a user) so anonymous requests can be counted too
+    without writing image bytes on every request.
+    """
+    __tablename__ = "analysis_events"
+
+    id = Column(String, primary_key=True, index=True, default=lambda: str(uuid.uuid4()))
+    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+    user_id = Column(String, ForeignKey("users.id"), nullable=True)  # NULL = anonymous
+    classifier = Column(String, nullable=True)

@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 
 from auth.models import User
-from analysis.models import Analysis, ModelResult
+from analysis.models import Analysis, AnalysisEvent, ModelResult
 
 
 class TestAnalysisModel:
@@ -389,3 +389,56 @@ class TestModelResultModel:
         assert confidences["LowConfidence"] == 0.0
         assert confidences["HighConfidence"] == 1.0
         assert abs(confidences["MidConfidence"] - 0.5432) < 0.0001
+
+
+class TestAnalysisEventModel:
+    """Tests for the AnalysisEvent model."""
+
+    def test_create_event_for_registered_user(self, db_session):
+        """Test logging an event for a logged-in user."""
+        user = User(username="testuser", hashed_password="password123")
+        db_session.add(user)
+        db_session.commit()
+
+        event = AnalysisEvent(user_id=user.id)
+        db_session.add(event)
+        db_session.commit()
+        db_session.refresh(event)
+
+        assert event.id is not None
+        assert event.user_id == user.id
+        assert isinstance(event.timestamp, datetime)
+
+    def test_create_event_for_anonymous_user(self, db_session):
+        """Test logging an event with no user (anonymous request)."""
+        event = AnalysisEvent()
+        db_session.add(event)
+        db_session.commit()
+        db_session.refresh(event)
+
+        assert event.id is not None
+        assert event.user_id is None
+
+    def test_event_classifier_is_optional(self, db_session):
+        """Test that classifier can be set or omitted."""
+        event = AnalysisEvent(classifier="CNNSpot")
+        db_session.add(event)
+        db_session.commit()
+        db_session.refresh(event)
+
+        assert event.classifier == "CNNSpot"
+
+    def test_count_mixed_anonymous_and_registered_events(self, db_session):
+        """Test that total count includes both anonymous and registered events."""
+        user = User(username="testuser", hashed_password="password123")
+        db_session.add(user)
+        db_session.commit()
+
+        db_session.add_all([
+            AnalysisEvent(user_id=user.id),
+            AnalysisEvent(),
+            AnalysisEvent(),
+        ])
+        db_session.commit()
+
+        assert db_session.query(AnalysisEvent).count() == 3

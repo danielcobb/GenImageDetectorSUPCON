@@ -194,6 +194,7 @@ export const Analyzer = () => {
   const [funnyMsg, setFunnyMsg] = useState(FUNNY_MESSAGES[0]);
   const [msgIdx, setMsgIdx] = useState(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [totalAnalyses, setTotalAnalyses] = useState<number | null>(null);
 
   const context = useContext(AppContext);
   const {
@@ -256,6 +257,19 @@ export const Analyzer = () => {
   useEffect(() => {
     if (currentResult) setPreview(currentResult.image);
   }, [currentResult]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${API_URL}/stats/total-analyses`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setTotalAnalyses(data.total_analyses);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const reanalyzeImage = async () => {
     if (!currentResult?.image) return;
@@ -553,12 +567,24 @@ export const Analyzer = () => {
                     fontSize: 15,
                     color: "#64748b",
                     lineHeight: 1.7,
-                    mb: 3,
+                    mb: totalAnalyses !== null ? 1.5 : 3,
                   }}
                 >
                   Upload any image and our ensemble of deep learning models will
                   tell you if it's authentic or AI-generated — in seconds.
                 </Typography>
+                {totalAnalyses !== null && (
+                  <Typography
+                    sx={{
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: "#6366f1",
+                      mb: 3,
+                    }}
+                  >
+                    {totalAnalyses.toLocaleString()} images analyzed so far
+                  </Typography>
+                )}
               </Box>
             </Box>
             {/* ── BIG upload button ── */}

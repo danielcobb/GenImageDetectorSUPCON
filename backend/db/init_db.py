@@ -1,6 +1,6 @@
 """Initialize the database and create tables."""
 from db.database import Base, engine
-from analysis.models import Analysis, ModelResult
+from analysis.models import Analysis, AnalysisEvent, ModelResult
 from auth.models import User
 
 def init_db():

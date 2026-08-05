@@ -6,7 +6,7 @@ from auth.routes import router as auth_router
 from analysis.routes import router as analysis_router
 from db.database import engine, Base
 from auth.models import User
-from analysis.models import Analysis, ModelResult
+from analysis.models import Analysis, AnalysisEvent, ModelResult
 app = FastAPI(
         title="GenImageDetector API",
         summary="AI-generated image detection and analysis service.",
