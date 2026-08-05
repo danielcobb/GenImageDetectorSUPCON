@@ -15,7 +15,7 @@ class Analysis(Base):
     filename = Column(String, nullable=False)
     image_data = Column(Text, nullable=False)  # Base64 encoded image
     aggregate_confidence = Column(Float, nullable=False)
-    created_at = Column(DateTime, default=datetime.now)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationship to user and model results
     user = relationship("User", back_populates="analyses")

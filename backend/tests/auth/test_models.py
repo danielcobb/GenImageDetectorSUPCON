@@ -64,7 +64,7 @@ class TestUserModel:
 
         assert user.created_at is not None
         assert isinstance(user.created_at, datetime)
-        assert user.created_at <= datetime.now()
+        assert user.created_at <= datetime.utcnow()
 
     def test_user_analyses_relationship(self, db_session):
         """Test that user has analyses relationship."""
