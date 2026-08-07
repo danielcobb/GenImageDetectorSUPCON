@@ -567,24 +567,12 @@ export const Analyzer = () => {
                     fontSize: 15,
                     color: "#64748b",
                     lineHeight: 1.7,
-                    mb: totalAnalyses !== null ? 1.5 : 3,
+                    mb: 3,
                   }}
                 >
                   Upload any image and our ensemble of deep learning models will
                   tell you if it's authentic or AI-generated — in seconds.
                 </Typography>
-                {totalAnalyses !== null && (
-                  <Typography
-                    sx={{
-                      fontSize: 13,
-                      fontWeight: 700,
-                      color: "#6366f1",
-                      mb: 3,
-                    }}
-                  >
-                    {totalAnalyses.toLocaleString()} images analyzed so far
-                  </Typography>
-                )}
               </Box>
             </Box>
             {/* ── BIG upload button ── */}
@@ -687,6 +675,36 @@ export const Analyzer = () => {
                 </Box>
               ))}
             </Box>
+            {totalAnalyses !== null && (
+              <Box
+                sx={{
+                  position: "fixed",
+                  bottom: 20,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  zIndex: 10,
+                  bgcolor: (t) =>
+                    t.palette.mode === "dark" ? "#181826" : "#fff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.08)"
+                      : "1px solid rgba(0,0,0,0.06)",
+                  borderRadius: 99,
+                  px: 2.5,
+                  py: 1,
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 8px 24px rgba(0,0,0,0.5)"
+                      : "0 8px 24px rgba(0,0,0,0.1)",
+                }}
+              >
+                <Typography
+                  sx={{ fontSize: 13, fontWeight: 700, color: "#6366f1" }}
+                >
+                  {totalAnalyses.toLocaleString()} images analyzed so far
+                </Typography>
+              </Box>
+            )}
           </>
         )}
 
