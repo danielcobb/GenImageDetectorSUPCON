@@ -679,7 +679,7 @@ export const Analyzer = () => {
               <Box
                 sx={{
                   position: "fixed",
-                  bottom: 20,
+                  bottom: 70,
                   left: "50%",
                   transform: "translateX(-50%)",
                   zIndex: 10,
