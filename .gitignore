@@ -22,6 +22,7 @@ venv/
 backend/ml/models/Effort/*.pth
 backend/ml/models/NPR/*.pth
 backend/ml/models/VIB/*.pth
+backend/ml/models/VIBSupCon/*.pth
 # Allow this
 !.vscode/extensions.json
 .venv/

@@ -32,6 +32,7 @@ from ml.classifiers.npr import NPRClassifier
 from ml.classifiers.npr_supcon import NPRSupConClassifier
 from ml.classifiers.spai import SPAIClassifier
 from ml.classifiers.vib import VIBClassifier
+from ml.classifiers.vib_supcon import VIBSupConClassifier
 
 # Lets Pillow's Image.open() decode HEIC/HEIF files (the default format for
 # photos captured on iPhone) in addition to its natively supported formats.
@@ -84,6 +85,15 @@ spai_classifier = SPAIClassifier(
 
 vib_classifier = VIBClassifier(
     _weights("best.pth"),
+    quiet=True,
+)
+
+# VIBNet_SupCon: CLIP ViT-L/14 (fully fine-tuned) + VIB head, SupCon-pretrained
+# on the 4-generator combined dataset. Only the Phase 2 checkpoint is needed
+# at inference time - see VIBSupConClassifier's docstring for why
+# "vib_supcon_3.pth" (4.17GB, Phase 1 encoder-only) isn't downloaded here.
+vibnet_supcon_classifier = VIBSupConClassifier(
+    _weights("vib_linear_5.pth"),
     quiet=True,
 )
 
@@ -180,6 +190,7 @@ async def analyze_image(
         "Effort": effort_supcon_classifier.analyze(img),
         "SPAI": spai_classifier.analyze(img),
         "VIB" : vib_classifier.analyze(img),
+        "VIBNet_SupCon": vibnet_supcon_classifier.analyze(img),
     }
 
 
