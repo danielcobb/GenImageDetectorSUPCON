@@ -39,6 +39,12 @@ A full-stack web application for detecting AI-generated images. The system analy
 
 ## Quick Start
 
+1. cd backend
+2. ./backendstartup.sh
+3. new terminal
+4. cd frontend
+5. ./frontendstartup.sh
+
 ### Backend
 
 1. Follow the installation steps in [`backend/README.md`](backend/README.md)
