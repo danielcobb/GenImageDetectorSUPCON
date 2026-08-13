@@ -10,7 +10,13 @@ import {
   IconButton,
   Link,
 } from "@mui/material";
-import { Login, Logout, History, DarkMode, LightMode } from "@mui/icons-material";
+import {
+  Login,
+  Logout,
+  History,
+  DarkMode,
+  LightMode,
+} from "@mui/icons-material";
 import { makeTheme } from "./theme";
 import { API_URL } from "./config";
 
@@ -245,9 +251,7 @@ const AppContent = () => {
               </Button>
               <Button
                 size="small"
-                onClick={() =>
-                  window.open(`${API_URL}/docs`, "_blank")
-                }
+                onClick={() => window.open(`${API_URL}/docs`, "_blank")}
                 sx={{
                   color: "#64748b",
                   fontWeight: 600,
@@ -319,7 +323,9 @@ const AppContent = () => {
               <Button
                 variant="contained"
                 size="small"
-                startIcon={<Login sx={{ display: { xs: "none", sm: "inline-flex" } }} />}
+                startIcon={
+                  <Login sx={{ display: { xs: "none", sm: "inline-flex" } }} />
+                }
                 onClick={() => setAuthDialogOpen(true)}
                 sx={{
                   fontSize: "13px",
@@ -329,10 +335,16 @@ const AppContent = () => {
                   minWidth: 0,
                 }}
               >
-                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                <Box
+                  component="span"
+                  sx={{ display: { xs: "none", sm: "inline" } }}
+                >
                   Sign In/Sign Up
                 </Box>
-                <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                <Box
+                  component="span"
+                  sx={{ display: { xs: "inline", sm: "none" } }}
+                >
                   Sign In
                 </Box>
               </Button>
@@ -396,7 +408,7 @@ const AppContent = () => {
               </Link>
               ·
               <Link
-                href="https://github.com/Ishajgill/GenImageDetector"
+                href="https://github.com/danielcobb/GenImageDetectorSUPCON"
                 target="_blank"
                 sx={{
                   mx: 1,
